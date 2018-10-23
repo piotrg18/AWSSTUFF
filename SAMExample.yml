@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A sample Lambda Safe Deployment Application
+
+Resources:
+  
+  SampleCostAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      CodeUri: src/
+      Runtime: python3.6
+      Description: A Cost Explorer simple lambda.
+      MemorySize: 128
+      Timeout: 10
+      AutoPublishAlias: livecosts
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/lambda_cost_explorer'
+      Events:
+        CostExplorerAPI:
+          Type: Api
+          Properties:
+            Path: /costs
+            Method: GET
+      DeploymentPreference:
+          Type: Linear10PercentEvery1Minute

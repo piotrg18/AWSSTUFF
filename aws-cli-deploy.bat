@@ -1,0 +1,1 @@
+aws cloudformation deploy --template-file packaged-template.yaml --stack-name my-cost-explorer-example  --capabilities CAPABILITY_IAM

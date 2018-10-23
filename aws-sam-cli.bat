@@ -1,0 +1,1 @@
+aws cloudformation package --template-file SAMExample.yml --s3-bucket awscodedeploylambda --output-template-file packaged-template.yaml
